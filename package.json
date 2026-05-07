@@ -1,0 +1,25 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.5.0",
+        "concurrently": "^9.0.1",
+        "daisyui": "^4.12.23",
+        "laravel-vite-plugin": "^3.0.0",
+        "postcss": "^8.5.13",
+        "tailwindcss": "^3.4.17",
+        "vite": "^8.0.0"
+    },
+    "dependencies": {
+        "@alpinejs/anchor": "^3.15.11",
+        "@alpinejs/focus": "^3.15.11",
+        "@alpinejs/intersect": "^3.15.11",
+        "@alpinejs/mask": "^3.15.11",
+        "alpinejs": "^3.15.11"
+    }
+}
