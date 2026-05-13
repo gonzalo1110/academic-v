@@ -16,7 +16,8 @@ use App\Livewire\Notas\Index as NotasIndex;
 use App\Http\Controllers\ReporteController;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+    Route::get('/', fn() => redirect('/login'))->name('home');
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
 
@@ -59,6 +60,7 @@ Route::middleware(['auth', 'rol:docente'])->prefix('docente')->name('docente.')-
     Route::get('/asignacion/{asignacion}/notas', \App\Livewire\Docente\Notas::class)->name('notas');
     Route::get('/asignacion/{asignacion}/asistencia', \App\Livewire\Docente\AsistenciaRegistro::class)->name('asistencia');
     Route::get('/asignacion/{asignacion}/categorias', \App\Livewire\Docente\Categorias::class)->name('categorias');
+    
 });
 
 // API para Estadísticas y IA

@@ -4,7 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="Sistema Académico del Instituto Tecnológico Industrial Brasil-Bolivia. Gestión de estudiantes, docentes, materias, notas y más.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="{{ url()->current() }}">
     <title>{{ $title ?? 'SisAcad' }} — ITI Brasil-Bolivia</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Instituto Tecnológico Industrial Brasil-Bolivia",
+      "alternateName": "ITIBB",
+      "url": "https://iti-bb.edu.bo",
+      "description": "Institución educativa técnica niveles medio y superior",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BO",
+        "addressLocality": "Santa Cruz de la Sierra"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Bolivia"
+      },
+      "sameAs": []
+    }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>

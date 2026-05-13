@@ -19,6 +19,11 @@
         font-family: 'Playfair Display', Georgia, serif;
     }
 
+    /* Tamaño de texto base más grande */
+    body {
+        @apply text-base;
+    }
+
     ::selection {
         background-color: rgba(26, 58, 107, 0.2);
         color: #1a3a6b;
@@ -26,74 +31,83 @@
 }
 
 @layer components {
+    /* Cards elevados con color */
     .card-elevated {
-        @apply bg-white rounded-2xl shadow-soft-lg border border-gray-100/50;
+        @apply bg-white rounded-2xl shadow-lg border border-gray-100/50;
     }
 
+    /* Botón gradient */
     .btn-gradient {
-        @apply bg-gradient-to-r from-primary to-brand-800 text-white border-0;
-        @apply hover:from-brand-800 hover:to-primary hover:shadow-lg;
+        @apply bg-gradient-to-r from-[#1a3a6b] to-[#2563eb] text-white border-0;
+        @apply hover:from-[#2563eb] hover:to-[#1a3a6b] hover:shadow-xl;
         @apply transition-all duration-300;
     }
 
+    /* Glass card */
     .glass-card {
         @apply bg-white/80 backdrop-blur-xl border border-white/20;
     }
 
+    /* Tarjetas de estadísticas */
     .stat-card {
         @apply relative overflow-hidden;
         @apply bg-gradient-to-br from-white to-gray-50;
-        @apply rounded-2xl shadow-soft border border-gray-100/80;
-        @apply transition-all duration-300 hover:shadow-soft-lg hover:-translate-y-1;
+        @apply rounded-2xl shadow-md border border-gray-100/80;
+        @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
     }
 
+    /* Nav items */
     .nav-item {
-        @apply relative flex items-center gap-3 px-4 py-2.5 rounded-xl;
-        @apply text-sm font-medium text-slate-600;
+        @apply relative flex items-center gap-3 px-4 py-3 rounded-xl;
+        @apply text-base font-medium text-slate-600;
         @apply transition-all duration-200;
-        @apply hover:bg-primary/5 hover:text-primary;
+        @apply hover:bg-[#1a3a6b]/5 hover:text-[#1a3a6b];
     }
 
     .nav-item-active {
-        @apply bg-primary/10 text-primary;
+        @apply bg-[#1a3a6b]/10 text-[#1a3a6b];
         @apply before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2;
-        @apply before:w-1 before:h-6 before:bg-primary before:rounded-r-full;
+        @apply before:w-1 before:h-8 before:bg-[#1a3a6b] before:rounded-r-full;
     }
 
+    /* Inputs premium */
     .input-premium {
-        @apply w-full px-4 py-3 rounded-xl border border-gray-200;
-        @apply bg-white text-gray-900;
+        @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200;
+        @apply bg-white text-gray-900 text-base;
         @apply transition-all duration-200;
-        @apply focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary;
+        @apply focus:outline-none focus:ring-2 focus:ring-[#1a3a6b]/20 focus:border-[#1a3a6b];
         @apply placeholder:text-gray-400;
     }
 
+    /* Tabla premium con colores */
     .table-premium {
-        @apply w-full;
+        @apply w-full text-base;
     }
 
     .table-premium thead {
-        @apply bg-gradient-to-r from-gray-50 to-gray-100/50;
+        @apply bg-gradient-to-r from-[#1a3a6b] to-[#2563eb] text-white;
     }
 
     .table-premium th {
-        @apply px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider;
+        @apply px-6 py-4 text-left text-base font-semibold uppercase tracking-wider;
     }
 
     .table-premium td {
-        @apply px-4 py-4 text-sm text-gray-700;
+        @apply px-6 py-4 text-base text-gray-700;
     }
 
     .table-premium tbody tr {
         @apply border-b border-gray-100 last:border-0;
         @apply transition-colors duration-150;
-        @apply hover:bg-primary/[0.02];
+        @apply hover:bg-[#1a3a6b]/5;
     }
 
+    /* Badges coloridos */
     .badge-premium {
-        @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+        @apply inline-flex items-center px-3 py-1.5 rounded-full text-base font-medium;
     }
 
+    /* Shimmer */
     .shimmer {
         background: linear-gradient(
             90deg,
@@ -103,6 +117,96 @@
         );
         background-size: 200% 100%;
         animation: shimmer 2s linear infinite;
+    }
+
+    /* Badges de roles */
+    .badge-admin {
+        @apply bg-gradient-to-r from-amber-500 to-orange-500 text-white border-0;
+    }
+
+    .badge-docente {
+        @apply bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0;
+    }
+
+    .badge-estudiante {
+        @apply bg-gradient-to-r from-emerald-500 to-teal-500 text-white border-0;
+    }
+
+    .badge-activo {
+        @apply bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0;
+    }
+
+    .badge-inactivo {
+        @apply bg-gradient-to-r from-gray-400 to-gray-500 text-white border-0;
+    }
+
+    /* Botones mejorado */
+    .btn-action {
+        @apply btn btn-sm bg-[#1a3a6b] text-white hover:bg-[#2563eb];
+        @apply transition-all duration-200 hover:shadow-lg;
+    }
+
+    /* Tablas striped con colores */
+    .table-striped tbody tr:nth-child(odd) {
+        @apply bg-blue-50/50;
+    }
+
+    .table-striped tbody tr:nth-child(even) {
+        @apply bg-white;
+    }
+
+    /* Header de página */
+    .page-header {
+        @apply mb-6 p-6 rounded-2xl;
+        @apply bg-gradient-to-r from-[#1a3a6b] to-[#2563eb] text-white;
+    }
+
+    .page-header h2 {
+        @apply text-2xl font-bold text-white;
+    }
+
+    .page-header p {
+        @apply text-white/80 text-base;
+    }
+
+    /* Card de contenido */
+    .content-card {
+        @apply bg-white rounded-2xl shadow-lg border border-gray-100;
+        @apply p-6;
+    }
+
+    /* Títulos de sección */
+    .section-title {
+        @apply text-xl font-bold text-[#1a3a6b] mb-4 pb-2 border-b-2 border-[#1a3a6b]/20;
+    }
+
+    /* Labels más grandes */
+    .label-premium {
+        @apply text-base font-semibold text-gray-700 mb-2;
+    }
+
+    /* Select mejorado */
+    .select-premium {
+        @apply select select-bordered select-lg w-full;
+        @apply border-2 border-gray-200 rounded-xl;
+        @apply focus:outline-none focus:ring-2 focus:ring-[#1a3a6b]/20 focus:border-[#1a3a6b];
+    }
+
+    /* Alertas coloridas */
+    .alert-success {
+        @apply bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 text-green-800;
+    }
+
+    .alert-error {
+        @apply bg-gradient-to-r from-red-50 to-rose-50 border-red-200 text-red-800;
+    }
+
+    .alert-warning {
+        @apply bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200 text-amber-800;
+    }
+
+    .alert-info {
+        @apply bg-gradient-to-r from-blue-50 to-cyan-50 border-blue-200 text-blue-800;
     }
 }
 
@@ -121,6 +225,17 @@
     .animate-delay-300 { animation-delay: 300ms; }
     .animate-delay-400 { animation-delay: 400ms; }
     .animate-delay-500 { animation-delay: 500ms; }
+
+    /* Texto más grande */
+    .text-lg {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+
+    .text-xl {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
 }
 
 [data-theme="itibb"] {
@@ -144,4 +259,35 @@
     --su: 160 84% 39%;
     --wa: 38 92% 50%;
     --er: 0 84% 60%;
+}
+
+/* Animaciones adicionales */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+    opacity: 0;
 }

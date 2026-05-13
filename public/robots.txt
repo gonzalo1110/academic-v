@@ -1,2 +1,17 @@
 User-agent: *
-Disallow:
+Allow: /
+
+Disallow: /dashboard
+Disallow: /usuarios
+Disallow: /materias
+Disallow: /periodos
+Disallow: /asignaciones
+Disallow: /inscripciones
+Disallow: /notas
+Disallow: /reportes
+Disallow: /mis-materias
+Disallow: /asignacion
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://sitio-academico.test/sitemap.xml
