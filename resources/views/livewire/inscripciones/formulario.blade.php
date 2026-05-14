@@ -28,7 +28,7 @@
                         <option value="">-- Seleccionar asignación --</option>
                         @foreach($asignaciones as $asignacion)
                             <option value="{{ $asignacion->id }}">
-                                {{ $asignacion->materia->nombre }} ({{ $asignacion->materia->codigo }}) - {{ $asignacion->periodo->nombre }}
+                                {{ $asignacion->materia->nombre }} ({{ $asignacion->materia->codigo }}) - {{ $asignacion->periodo->nombre_formateado }}
                             </option>
                         @endforeach
                     </select>

@@ -43,7 +43,7 @@
             <option value="">Todas las asignaciones</option>
             @foreach($asignaciones as $asignacion)
                 <option value="{{ $asignacion->id }}">
-                    {{ $asignacion->materia->nombre }} — {{ $asignacion->periodo->nombre }}
+                    {{ $asignacion->materia->nombre }} — {{ $asignacion->periodo->nombre_formateado }}
                 </option>
             @endforeach
         </select>
@@ -92,7 +92,7 @@
                         {{-- Período --}}
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-2">
-                                <span class="font-medium text-gray-700">{{ $inscripcion->asignacion->periodo->nombre }}</span>
+                                <span class="font-medium text-gray-700">{{ $inscripcion->asignacion->periodo->nombre_formateado }}</span>
                                 @if($inscripcion->asignacion->periodo->activo)
                                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">
                                         <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
@@ -157,7 +157,7 @@
     {{-- Modal Premium --}}
     @if($modalConfirmar)
         <div class="modal modal-open">
-            <div class="modal-box max-w-md animate-scale-in">
+            <div class="modal-box bg-white max-w-md animate-scale-in">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
                         <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -174,7 +174,9 @@
                     <button wire:click="eliminar" class="btn bg-red-600 text-white hover:bg-red-700">Eliminar</button>
                 </div>
             </div>
-            <div class="modal-backdrop bg-black/40 backdrop-blur-sm"></div>
+            <form method="dialog">
+                <button class="modal-backdrop bg-black/50 backdrop-blur-sm"></button>
+            </form>
         </div>
     @endif
 

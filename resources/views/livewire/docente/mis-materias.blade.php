@@ -20,7 +20,7 @@
                         </p>
                     </div>
                     <div class="badge badge-info">
-                        {{ $asignacion->periodo->nombre }}
+                        {{ $asignacion->periodo->nombre_formateado }}
                     </div>
                 </div>
 

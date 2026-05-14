@@ -20,10 +20,17 @@ class Formulario extends Component
     protected function rules(): array
     {
         return [
-            'nombre'       => 'required|string|max:20',
+            'nombre'       => 'required|string|max:20|regex:/^(I|II)\s*-\s*\d{4}$/',
             'fecha_inicio' => 'required|date',
             'fecha_fin'    => 'required|date|after:fecha_inicio',
             'activo'       => 'boolean',
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            'nombre.regex' => 'El formato debe ser: I - 2026 o II - 2026',
         ];
     }
 

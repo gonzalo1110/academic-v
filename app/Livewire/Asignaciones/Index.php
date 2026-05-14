@@ -22,7 +22,7 @@ class Index extends Component
     public function mount(): void
     {
         $periodoActivo = Periodo::activo();
-        if ($periodoActivo) {
+        if ($periodoActivo && Asignacion::where('periodo_id', $periodoActivo->id)->exists()) {
             $this->filtroPeriodo = (string) $periodoActivo->id;
         }
     }

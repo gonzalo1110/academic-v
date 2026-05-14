@@ -55,7 +55,7 @@
                     <select wire:model="periodo_id" class="select select-bordered w-full rounded-xl border-2 border-gray-200 focus:border-[#1a3a6b] focus:ring-2 focus:ring-[#1a3a6b]/20">
                         <option value="">-- Seleccionar período --</option>
                         @foreach($periodos as $periodo)
-                            <option value="{{ $periodo->id }}">{{ $periodo->nombre }}</option>
+                            <option value="{{ $periodo->id }}">{{ $periodo->nombre_formateado }}</option>
                         @endforeach
                     </select>
                     @error('periodo_id')<span class="text-error text-xs">{{ $message }}</span>@enderror

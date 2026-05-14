@@ -41,6 +41,18 @@ class Formulario extends Component
         ];
     }
 
+    protected function messages(): array
+    {
+        return [
+            'ci.unique' => 'El carnet de identidad ya está registrado',
+            'ci.required' => 'El carnet de identidad es obligatorio',
+            'primer_nombre.required' => 'El primer nombre es obligatorio',
+            'primer_apellido.required' => 'El primer apellido es obligatorio',
+            'rol.required' => 'El rol es obligatorio',
+            'semestre_actual.required_if' => 'El semestre es obligatorio para estudiantes',
+        ];
+    }
+
     public function mount(?int $id = null): void
     {
         if ($id) {

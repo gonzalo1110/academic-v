@@ -7,7 +7,7 @@
         </a>
         <div>
             <h2 class="text-xl font-bold">Configurar Categorías</h2>
-            <p class="text-sm text-gray-500">{{ $asignacion->materia->nombre }} — {{ $asignacion->periodo->nombre }}</p>
+            <p class="text-sm text-gray-500">{{ $asignacion->materia->nombre }} — {{ $asignacion->periodo->nombre_formateado }}</p>
         </div>
     </div>
 

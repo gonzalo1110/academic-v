@@ -24,7 +24,7 @@
                     <label class="label">
                         <span class="label-text font-medium text-gray-700">Nombre del período <span class="text-red-500 text-xs">*</span></span>
                     </label>
-                    <input wire:model="nombre" type="text" placeholder="Ej: Primer Semestre 2024" class="input-premium">
+                    <input wire:model="nombre" type="text" placeholder="Ej: I - 2026" class="input-premium">
                     @error('nombre')<span class="text-error text-xs">{{ $message }}</span>@enderror
                 </div>
 

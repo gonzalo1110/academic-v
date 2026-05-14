@@ -8,7 +8,7 @@
         <div>
             <h2 class="text-xl font-bold">Registro de Notas</h2>
             <p class="text-sm text-gray-500">
-                {{ $asignacion->materia->nombre }} — {{ $asignacion->periodo->nombre }}
+                {{ $asignacion->materia->nombre }} — {{ $asignacion->periodo->nombre_formateado }}
             </p>
         </div>
     </div>

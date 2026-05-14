@@ -48,7 +48,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                     </svg>
                                 </div>
-                                <span class="font-medium text-gray-800">{{ $periodo->nombre }}</span>
+                                <span class="font-medium text-gray-800">{{ $periodo->nombre_formateado }}</span>
                             </div>
                         </td>
 
@@ -125,10 +125,10 @@
     {{-- Modal Premium --}}
     @if($modalConfirmar)
         <div class="modal modal-open">
-            <div class="modal-box max-w-md animate-scale-in">
+            <div class="modal-box bg-white max-w-md animate-scale-in">
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-error/10 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                         </svg>
                     </div>
@@ -139,10 +139,12 @@
                 </div>
                 <div class="modal-action mt-6">
                     <button wire:click="$set('modalConfirmar', false)" class="btn btn-ghost">Cancelar</button>
-                    <button wire:click="eliminar" class="btn btn-error">Eliminar</button>
+                    <button wire:click="eliminar" class="btn bg-red-600 text-white hover:bg-red-700">Eliminar</button>
                 </div>
             </div>
-            <div class="modal-backdrop bg-black/40 backdrop-blur-sm"></div>
+            <form method="dialog">
+                <button class="modal-backdrop bg-black/50 backdrop-blur-sm"></button>
+            </form>
         </div>
     @endif
 

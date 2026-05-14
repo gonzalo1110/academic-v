@@ -11,7 +11,7 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                Período: {{ $stats['periodo_activo'] }}
+                Período: {{ $this->stats['periodo_activo'] ?? 'Ninguno' }}
             </span>
         </div>
     </div>
@@ -28,7 +28,7 @@
                 </div>
                 <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">Total</span>
             </div>
-            <div class="text-3xl font-bold text-[#1a3a6b] mb-1">{{ $stats['usuarios'] }}</div>
+            <div class="text-3xl font-bold text-[#1a3a6b] mb-1">{{ $this->stats['usuarios'] ?? 0 }}</div>
             <div class="text-sm text-gray-500">Usuarios Totales</div>
         </div>
 
@@ -42,7 +42,7 @@
                 </div>
                 <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">Registrados</span>
             </div>
-            <div class="text-3xl font-bold text-green-600 mb-1">{{ $stats['estudiantes'] }}</div>
+            <div class="text-3xl font-bold text-green-600 mb-1">{{ $this->stats['estudiantes'] ?? 0 }}</div>
             <div class="text-sm text-gray-500">Estudiantes</div>
         </div>
 
@@ -56,7 +56,7 @@
                 </div>
                 <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">Activos</span>
             </div>
-            <div class="text-3xl font-bold text-blue-600 mb-1">{{ $stats['docentes'] }}</div>
+            <div class="text-3xl font-bold text-blue-600 mb-1">{{ $this->stats['docentes'] ?? 0 }}</div>
             <div class="text-sm text-gray-500">Docentes</div>
         </div>
 
@@ -70,7 +70,7 @@
                 </div>
                 <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">Plan</span>
             </div>
-            <div class="text-3xl font-bold text-amber-600 mb-1">{{ $stats['materias'] }}</div>
+            <div class="text-3xl font-bold text-amber-600 mb-1">{{ $this->stats['materias'] ?? 0 }}</div>
             <div class="text-sm text-gray-500">Materias</div>
         </div>
     </div>
@@ -132,14 +132,28 @@
                 </div>
             </div>
             <div class="space-y-3">
-                <div class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-200">
-                    <span class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-gray-700">Servidor Ollama: <strong class="text-green-700">Activo</strong></span>
-                </div>
-                <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
-                    <span class="text-gray-600">Modelo: <strong class="text-[#1a3a6b]">qwen2.5:3b</strong></span>
-                    <p class="text-xs text-gray-400 mt-1">Optimizado para i5 7ma Gen</p>
-                </div>
+                @if($this->iaStatus['disponible'] ?? false)
+                    <div class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-200">
+                        <span class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-gray-700">Servidor Ollama: <strong class="text-green-700">Activo</strong></span>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                        <span class="text-gray-600">Modelo: <strong class="text-[#1a3a6b]">{{ $this->iaStatus['modelo'] }}</strong></span>
+                        @if(!empty($this->iaStatus['modelos']))
+                            <p class="text-xs text-gray-400 mt-1">Modelos disponibles: {{ implode(', ', $this->iaStatus['modelos']) }}</p>
+                        @endif
+                    </div>
+                @else
+                    <div class="flex items-center gap-3 p-3 bg-red-50 rounded-xl border border-red-200">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="text-gray-700">Servidor Ollama: <strong class="text-red-700">Inactivo</strong></span>
+                    </div>
+                    <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+                        <p class="text-sm text-amber-700">Para activar Ollama, ejecuta:</p>
+                        <code class="text-xs text-amber-800 block mt-1">ollama serve</code>
+                        <code class="text-xs text-amber-800 block">ollama pull qwen2.5:3b</code>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
