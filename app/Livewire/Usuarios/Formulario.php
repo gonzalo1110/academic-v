@@ -8,6 +8,7 @@ use App\Models\Estudiante;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\RouteParameter;
 
 #[Layout('components.layouts.app')]
 #[Title('Usuario')]
@@ -53,6 +54,7 @@ class Formulario extends Component
         ];
     }
 
+    #[RouteParameter]
     public function mount(?int $id = null): void
     {
         if ($id) {
@@ -74,6 +76,13 @@ class Formulario extends Component
     public function updated($field): void
     {
         if (in_array($field, ['primer_nombre', 'primer_apellido', 'segundo_apellido', 'ci'])) {
+            $this->actualizarPassword();
+        }
+    }
+
+    public function updatedResetPassword($value): void
+    {
+        if ($value) {
             $this->actualizarPassword();
         }
     }

@@ -108,7 +108,7 @@
                 @if($usuarioId)
                 <div class="form-control">
                     <label class="label cursor-pointer justify-start gap-3">
-                        <input wire:model="resetPassword" type="checkbox" class="checkbox checkbox-primary checkbox-sm">
+                        <input wire:model.live="resetPassword" type="checkbox" class="checkbox checkbox-primary checkbox-sm">
                         <span class="label-text text-gray-700">Resetear contraseña</span>
                     </label>
                 </div>

@@ -16,13 +16,23 @@ class Index extends Component
 
     public string $buscar = '';
     public string $filtroRol = '';
+    public ?int $filtroSemestre = null;
     public bool $modalConfirmar = false;
     public ?int $usuarioAEliminar = null;
 
-    protected $queryString = ['buscar', 'filtroRol'];
+    protected $queryString = ['buscar', 'filtroRol', 'filtroSemestre'];
 
     public function updatingBuscar(): void { $this->resetPage(); }
-    public function updatingFiltroRol(): void { $this->resetPage(); }
+    public function updatingFiltroRol(): void { 
+        $this->resetPage(); 
+        $this->filtroSemestre = null;
+    }
+
+    public function updatedFiltroRol(): void
+    {
+        $this->filtroSemestre = null;
+    }
+    public function updatingFiltroSemestre(): void { $this->resetPage(); }
 
     public function confirmarEliminar(int $id): void
     {
@@ -33,7 +43,16 @@ class Index extends Component
     public function eliminar(): void
     {
         if ($this->usuarioAEliminar) {
-            Usuario::findOrFail($this->usuarioAEliminar)->delete();
+            $usuario = Usuario::findOrFail($this->usuarioAEliminar);
+            
+            if ($usuario->docente) {
+                $usuario->docente->delete();
+            }
+            if ($usuario->estudiante) {
+                $usuario->estudiante->delete();
+            }
+            
+            $usuario->delete();
             $this->modalConfirmar = false;
             $this->usuarioAEliminar = null;
             session()->flash('success', 'Usuario eliminado correctamente.');
@@ -49,6 +68,9 @@ class Index extends Component
                   ->orWhere('primer_apellido', 'like', "%{$this->buscar}%")
             )
             ->when($this->filtroRol, fn($q) => $q->where('rol', $this->filtroRol))
+            ->when($this->filtroRol === 'estudiante' && $this->filtroSemestre, fn($q) => 
+                $q->whereHas('estudiante', fn($sq) => $sq->where('semestre_actual', $this->filtroSemestre))
+            )
             ->orderBy('primer_apellido')
             ->paginate(12);
 

@@ -45,6 +45,14 @@
             <option value="docente">Docentes</option>
             <option value="estudiante">Estudiantes</option>
         </select>
+        @if($filtroRol === 'estudiante')
+        <select wire:model.live="filtroSemestre" class="select select-bordered select-sm sm:w-40">
+            <option value="">Todos los semestres</option>
+            @for($s = 1; $s <= 6; $s++)
+            <option value="{{ $s }}">Semestre {{ $s }}</option>
+            @endfor
+        </select>
+        @endif
     </div>
 
     {{-- Tabla Premium --}}
@@ -56,6 +64,9 @@
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Usuario</th>
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">CI</th>
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Rol</th>
+                        @if($usuarios->contains(fn($u) => $u->estudiante && $u->estudiante->semestre_actual))
+                        <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Semestre</th>
+                        @endif
                         <th class="px-6 py-4 text-left text-sm font-semibold uppercase tracking-wider">Estado</th>
                         <th class="px-6 py-4 text-right text-sm font-semibold uppercase tracking-wider">Acciones</th>
                     </tr>
@@ -95,6 +106,15 @@
                                 </span>
                             @endif
                         </td>
+                        @if($usuarios->contains(fn($u) => $u->estudiante && $u->estudiante->semestre_actual))
+                        <td class="px-6 py-4">
+                            @if($usuario->estudiante && $usuario->estudiante->semestre_actual)
+                                <span class="font-medium text-gray-700">Semestre {{ $usuario->estudiante->semestre_actual }}</span>
+                            @else
+                                <span class="text-gray-400">—</span>
+                            @endif
+                        </td>
+                        @endif
                         <td class="px-6 py-4">
                             @if($usuario->docente || $usuario->estudiante)
                                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-green-100 text-green-700 border border-green-200">
