@@ -8,7 +8,6 @@ use App\Models\Estudiante;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
-use Illuminate\Support\Facades\Hash;
 
 #[Layout('components.layouts.app')]
 #[Title('Usuario')]
@@ -74,7 +73,7 @@ class Formulario extends Component
                 $this->primer_nombre,
                 $this->primer_apellido,
                 $this->ci,
-                $this->segundo_apellido ?? ''
+                $this->segundo_apellido ?? null
             );
         } else {
             $this->passwordPreview = '—';
@@ -89,7 +88,7 @@ class Formulario extends Component
             $this->primer_nombre,
             $this->primer_apellido,
             $this->ci,
-            $this->segundo_apellido ?? ''
+            $this->segundo_apellido ?? null
         );
 
         $datos = [
@@ -102,12 +101,12 @@ class Formulario extends Component
         ];
 
         if (!$this->usuarioId) {
-            $datos['password'] = Hash::make($passwordInicial);
+            $datos['password'] = $passwordInicial;
             $usuario = Usuario::create($datos);
         } else {
             $usuario = Usuario::findOrFail($this->usuarioId);
             if ($this->resetPassword) {
-                $datos['password'] = Hash::make($passwordInicial);
+                $datos['password'] = $passwordInicial;
             }
             $usuario->update($datos);
         }

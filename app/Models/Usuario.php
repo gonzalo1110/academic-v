@@ -74,21 +74,24 @@ class Usuario extends Authenticatable
 
     /**
      * Genera la contraseña inicial basada en la regla de negocio:
-     * Inicial del primer nombre + Inicial del primer apellido + Inicial del segundo apellido + CI (todo en minúsculas).
+     * Inicial primer nombre + Inicial primer apellido (+ opcional segundo apellido) + CI
      */
     public static function generarPasswordInicial(?string $nombre, ?string $apellido, ?string $ci, ?string $segundoApellido = null): string
     {
-        // Si falta algún dato, devolvemos un string vacío o un placeholder
         if (empty($nombre) || empty($apellido) || empty($ci)) {
             return '—';
         }
 
-        // Obtener la primera letra del nombre y apellido (usando mb_substr para caracteres latinos como tildes o la Ñ)
         $inicialNombre = mb_substr($nombre, 0, 1, 'UTF-8');
         $inicialApellido = mb_substr($apellido, 0, 1, 'UTF-8');
-        $inicialApellido2 = $segundoApellido ? mb_substr($segundoApellido, 0, 1, 'UTF-8') : '';
-
-        // Retornar la combinación: iniciales en mayúsculas + CI
-        return mb_strtoupper($inicialNombre . $inicialApellido . $inicialApellido2, 'UTF-8') . $ci;
+        
+        // Si tiene segundo apellido, usar las 3 iniciales
+        if (!empty($segundoApellido)) {
+            $inicialApellido2 = mb_substr($segundoApellido, 0, 1, 'UTF-8');
+            return mb_strtoupper($inicialNombre . $inicialApellido . $inicialApellido2, 'UTF-8') . $ci;
+        }
+        
+        // Solo 2 iniciales
+        return mb_strtoupper($inicialNombre . $inicialApellido, 'UTF-8') . $ci;
     }
 }

@@ -1,31 +1,44 @@
-<div class="p-6 max-w-2xl mx-auto">
-    <div class="flex items-center gap-3 mb-6">
-        <a href="{{ route('admin.usuarios') }}" class="btn btn-ghost btn-sm btn-circle">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-        </a>
-        <div>
-            <h2 class="text-xl font-bold">{{ $usuarioId ? 'Editar Usuario' : 'Nuevo Usuario' }}</h2>
-            <p class="text-sm text-gray-500">Completa el formulario para {{ $usuarioId ? 'actualizar' : 'crear' }} un usuario</p>
+<div class="p-4 md:p-6 lg:p-8 animate-fade-in">
+
+    {{-- Header con gradiente --}}
+    <div class="page-header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div class="flex items-center gap-3">
+            <a href="{{ route('admin.usuarios') }}" class="btn btn-ghost btn-circle hover:bg-white/20 text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </a>
+            <div>
+                <h2 class="font-display text-2xl font-bold text-white">{{ $usuarioId ? 'Editar Usuario' : 'Nuevo Usuario' }}</h2>
+                <p class="text-white/80 mt-1">Completa el formulario para {{ $usuarioId ? 'actualizar' : 'crear' }} un usuario</p>
+            </div>
         </div>
     </div>
 
-    <div class="card bg-base-100 shadow">
-        <div class="card-body">
-            <form wire:submit="guardar" class="space-y-4">
+    {{-- Formulario Premium --}}
+    <div class="card-elevated max-w-2xl mx-auto animate-slide-up animate-delay-100">
+        <div class="card-body p-6 sm:p-8">
+            <form wire:submit="guardar" class="space-y-6">
 
                 {{-- CI + Rol --}}
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="form-control">
-                        <label class="label"><span class="label-text">CI *</span></label>
+                        <label class="label">
+                            <span class="label-text font-medium text-gray-700">
+                                CI <span class="text-red-500 text-xs">*</span>
+                            </span>
+                        </label>
                         <input wire:model.live="ci" type="text" placeholder="Ej: 8765432"
-                            class="input input-bordered @error('ci') input-error @enderror">
+                            class="input-premium @error('ci') border-error focus:border-error @enderror">
                         @error('ci')<span class="text-error text-xs mt-1">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text">Rol *</span></label>
-                        <select wire:model.live="rol" class="select select-bordered">
+                        <label class="label">
+                            <span class="label-text font-medium text-gray-700">
+                                Rol <span class="text-red-500 text-xs">*</span>
+                            </span>
+                        </label>
+                        <select wire:model.live="rol" class="select select-bordered w-full rounded-xl border-2 border-gray-200 focus:border-[#1a3a6b] focus:ring-2 focus:ring-[#1a3a6b]/20">
                             <option value="estudiante">Estudiante</option>
                             <option value="docente">Docente</option>
                             <option value="admin">Administrador</option>
@@ -34,40 +47,56 @@
                 </div>
 
                 {{-- Nombres --}}
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="form-control">
-                        <label class="label"><span class="label-text">Primer nombre *</span></label>
+                        <label class="label">
+                            <span class="label-text font-medium text-gray-700">
+                                Primer nombre <span class="text-red-500 text-xs">*</span>
+                            </span>
+                        </label>
                         <input wire:model.live="primer_nombre" type="text" placeholder="Juan"
-                            class="input input-bordered @error('primer_nombre') input-error @enderror">
+                            class="input-premium @error('primer_nombre') border-error focus:border-error @enderror">
                         @error('primer_nombre')<span class="text-error text-xs">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text">Segundo nombre</span></label>
+                        <label class="label">
+                            <span class="label-text font-medium text-gray-700">Segundo nombre</span>
+                        </label>
                         <input wire:model="segundo_nombre" type="text" placeholder="Carlos"
-                            class="input input-bordered">
+                            class="input-premium">
                     </div>
                 </div>
 
                 {{-- Apellidos --}}
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="form-control">
-                        <label class="label"><span class="label-text">Primer apellido *</span></label>
+                        <label class="label">
+                            <span class="label-text font-medium text-gray-700">
+                                Primer apellido <span class="text-red-500 text-xs">*</span>
+                            </span>
+                        </label>
                         <input wire:model.live="primer_apellido" type="text" placeholder="Pérez"
-                            class="input input-bordered @error('primer_apellido') input-error @enderror">
+                            class="input-premium @error('primer_apellido') border-error focus:border-error @enderror">
                         @error('primer_apellido')<span class="text-error text-xs">{{ $message }}</span>@enderror
                     </div>
                     <div class="form-control">
-                        <label class="label"><span class="label-text">Segundo apellido</span></label>
-                        <input wire:model="segundo_apellido" type="text" placeholder="García"
-                            class="input input-bordered">
+                        <label class="label">
+                            <span class="label-text font-medium text-gray-700">Segundo apellido</span>
+                        </label>
+                        <input wire:model.live="segundo_apellido" type="text" placeholder="García (opcional)"
+                            class="input-premium">
                     </div>
                 </div>
 
                 {{-- Campo condicional estudiante --}}
                 @if($rol === 'estudiante')
-                <div class="form-control">
-                    <label class="label"><span class="label-text">Semestre actual *</span></label>
-                    <select wire:model="semestre_actual" class="select select-bordered">
+                <div class="form-control animate-fade-in">
+                    <label class="label">
+                        <span class="label-text font-medium text-gray-700">
+                            Semestre actual <span class="text-red-500 text-xs">*</span>
+                        </span>
+                    </label>
+                    <select wire:model="semestre_actual" class="select select-bordered w-full rounded-xl border-2 border-gray-200 focus:border-[#1a3a6b] focus:ring-2 focus:ring-[#1a3a6b]/20">
                         @for($s = 1; $s <= 6; $s++)
                         <option value="{{ $s }}">Semestre {{ $s }}</option>
                         @endfor
@@ -79,28 +108,45 @@
                 @if($usuarioId)
                 <div class="form-control">
                     <label class="label cursor-pointer justify-start gap-3">
-                        <input wire:model="resetPassword" type="checkbox" class="checkbox checkbox-sm">
-                        <span class="label-text">Resetear contraseña</span>
+                        <input wire:model="resetPassword" type="checkbox" class="checkbox checkbox-primary checkbox-sm">
+                        <span class="label-text text-gray-700">Resetear contraseña</span>
                     </label>
                 </div>
                 @endif
 
-                {{-- Password preview --}}
+                {{-- Contraseña inicial preview --}}
                 @if(!$usuarioId || $resetPassword)
-                <div class="alert alert-info py-2">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                    <span class="text-sm">Password {{ $usuarioId ? 'inicial (si reseteas)' : 'inicial' }}:
-                        <strong class="font-mono">{{ $passwordPreview }}</strong>
-                    </span>
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl p-4 animate-fade-in">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-[#1a3a6b]/10 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-[#1a3a6b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Contraseña inicial:</p>
+                            <p class="font-mono font-bold text-lg text-[#1a3a6b]">
+                                {{ $passwordPreview === '—' ? '—' : $passwordPreview }}
+                            </p>
+                            <p class="text-xs text-gray-500">
+                                @if($segundo_apellido)
+                                    ({{ substr($primer_nombre, 0, 1) }}{{ substr($primer_apellido, 0, 1) }}{{ substr($segundo_apellido, 0, 1) }}{{ $ci }})
+                                @else
+                                    ({{ substr($primer_nombre, 0, 1) }}{{ substr($primer_apellido, 0, 1) }}{{ $ci }})
+                                @endif
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 @endif
 
                 {{-- Botones --}}
-                <div class="flex justify-end gap-3 pt-2">
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-4">
                     <button type="button" wire:click="cancelar" class="btn btn-ghost">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="bg-gradient-to-r from-[#1a3a6b] to-[#2563eb] text-white font-bold px-6 py-2.5 rounded-xl hover:shadow-lg hover:shadow-[#1a3a6b]/30 transition-all duration-300 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
                         {{ $usuarioId ? 'Actualizar' : 'Crear usuario' }}
                     </button>
                 </div>
@@ -108,4 +154,5 @@
             </form>
         </div>
     </div>
+
 </div>

@@ -14,6 +14,7 @@ use App\Livewire\Inscripciones\Index as InscripcionesIndex;
 use App\Livewire\Inscripciones\Formulario as InscripcionesFormulario;
 use App\Livewire\Notas\Index as NotasIndex;
 use App\Http\Controllers\ReporteController;
+use App\Livewire\Dashboard\Admin as AdminDashboard;
 
 Route::middleware('guest')->group(function () {
     Route::get('/', fn() => redirect('/login'))->name('home');
@@ -28,7 +29,7 @@ Route::middleware('auth')->group(function () {
 
 // Admin
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', AdminDashboard::class)->name('dashboard');
     Route::get('/usuarios', UsuariosIndex::class)->name('usuarios');
     Route::get('/usuarios/crear', UsuariosFormulario::class)->name('usuarios.crear');
     Route::get('/usuarios/{id}/editar', UsuariosFormulario::class)->name('usuarios.editar');
